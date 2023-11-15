@@ -59,8 +59,8 @@ namespace NumberNotationTranslatorClassLibrary
         public NotationTranslator(int number, int notationFrom, int notationTo)
         {
             Number = number;
-            NotationFrom = notationFrom;
-            NotationTo = notationTo;
+            NotationFrom = notationFrom;//исходная СС
+            NotationTo = notationTo;//результ СС
         }
 
         public int FromNotationFromToDecimal() 
@@ -68,7 +68,22 @@ namespace NumberNotationTranslatorClassLibrary
             // каждую цифру умножить на основание системы счисления в степени порядка и сложить
             // 123 в пятиричной с.с. = 1*5^2 + 2*5^1 + 3*5^0 в десятичной с.с.
             // Number, NumberFrom
-            return 0; 
+            string numStr=Number.ToString();
+            int resultof10Numsys = 0;
+            int rank = 0;
+            for (int i = numStr.Length-1; i >=0; i--)
+            {
+                for (int j = 0; j < notations.Length; j++)
+                {
+                    resultof10Numsys += (int)(numStr[i] + Math.Pow(NotationTo, rank));
+                    rank++;
+                    break;
+                }
+                /*ResultofNotationto += numStr[i] * Math.Pow((double)NotationTo,(double)(numStr.Length-1))*/
+                
+            }
+
+            return resultof10Numsys; 
         }
         public int FromDecimalToNotationTo() 
         { 
